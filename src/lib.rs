@@ -75,7 +75,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! validbr = { version = "0.1", features = ["serde"] }
+//! validbr = { version = "0.2", features = ["serde"] }
 //! ```
 //!
 //! ## [rand](https://crates.io/crates/rand) support
@@ -85,7 +85,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! validbr = { version = "0.1", features = ["rand"] }
+//! validbr = { version = "0.2", features = ["rand"] }
 //! ```
 //!
 //! ## Enable all
@@ -93,7 +93,7 @@
 //! You could enable all features using `complete` flag:
 //! ```toml
 //! [dependencies]
-//! validbr = { version = "0.1", features = ["complete"] }
+//! validbr = { version = "0.2", features = ["complete"] }
 //! ```
 #![feature(doc_cfg)]
 #![feature(const_evaluatable_checked, const_generics, const_panic)]
@@ -112,12 +112,16 @@ pub mod append;
 pub mod cnpj;
 /// Cpf utility functions
 pub mod cpf;
+/// RG utility functions
+pub mod rg;
 
 #[cfg(feature = "serde")]
 use {
     serde::Serialize,
     serde::Deserialize
 };
+use crate::EmitterOrg::SSP;
+use std::fmt::Formatter;
 
 
 lazy_static! {
@@ -217,8 +221,94 @@ pub struct Cnpj {
     pub verifier_digits: [u8; 2],
 }
 
+/// RG does not have a standard for its format,
+/// so validbr uses [`String`] representing the RG code.
+/// Some emitters uses modulo 11 validation, others don't, some of them uses number only
+/// with verifier digit, others don't and includes Letters and special chars.
+///
+/// See [`Rg::new`] for examples of Rg construction.
+#[derive(Debug, Eq, PartialEq, Hash, Clone)]
+#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
+pub struct Rg {
+    /// RG code/Number.
+    pub code: String,
+    // RG emitter organization.
+    pub emitter_org: EmitterOrg
+}
+
+
+/// List of governmental organizations which emits Brazilian Registries.
+#[derive(Debug, Eq, PartialEq, Hash, Clone)]
+#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
+pub enum EmitterOrg {
+    SSP(UF),
+    PoliciaFedaral,
+    CartorioCivil,
+    Other(String)
+}
+
+impl std::fmt::Display for EmitterOrg {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        return match self {
+            SSP(uf) => {
+                write!(f, "SSP{}", uf)
+            },
+            EmitterOrg::PoliciaFedaral => {
+                write!(f, "Polícia Federal")
+            },
+            EmitterOrg::CartorioCivil => {
+                write!(f, "Cartório Civil")
+            }
+            EmitterOrg::Other(other) => {
+                write!(f, "{}", other)
+            }
+        }
+    }
+}
+
+/// List of Brazilian Federative Units (Unidades Federativas).
+#[derive(Debug, Eq, PartialEq, Hash, Clone)]
+#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
+pub enum UF {
+    AC,
+    AL,
+    AP,
+    AM,
+    BA,
+    CE,
+    DF,
+    ES,
+    GO,
+    MA,
+    MT,
+    MS,
+    MG,
+    PA,
+    PB,
+    PR,
+    PE,
+    PI,
+    RJ,
+    RN,
+    RS,
+    RO,
+    RR,
+    SC,
+    SP,
+    SE,
+    TO
+}
+
+impl std::fmt::Display for UF {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{:?}", self)
+    }
+}
+
 #[cfg(test)]
 mod tests {
+    use crate::EmitterOrg::SSP;
+    use crate::UF::SP;
 
     #[cfg(feature = "rand")]
     #[test]
@@ -262,5 +352,14 @@ mod tests {
         let verifier = crate::cnpj::calculate_verifier_digits(cnpj.digits, cnpj.branch_digits);
         assert_eq!(verifier.0, cnpj.verifier_digits[0]);
         assert_eq!(verifier.1, cnpj.verifier_digits[1]);
+    }
+
+    #[test]
+    fn rg() {
+        use crate::Rg;
+
+        let rg = Rg::new("A8974B-X", SSP(SP));
+
+        assert_eq!(format!("{}", rg), "A8974B-X SSPSP");
     }
 }
