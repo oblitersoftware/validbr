@@ -19,8 +19,8 @@ jobs:
       run: curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain nightly -y
     - uses: actions/checkout@v2
     - name: Build
-      run: cargo build --verbose --all-features
+      run: cargo +nightly build --verbose --all-features
     - name: Run tests
-      run: cargo test --verbose --all-features
+      run: cargo +nightly test --verbose --all-features
     - name: Run doc generation
-      run: cargo doc --verbose --all-features
+      run: cargo +nightly doc --verbose --all-features
