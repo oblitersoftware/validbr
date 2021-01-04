@@ -1,8 +1,9 @@
 [package]
 name = "validbr"
-version = "0.2.0"
+version = "0.2.1"
 authors = ["oblitersofware", "JonathanxD <jhrldev@gmail.com>"]
 edition = "2018"
+license = "MIT"
 license-file = "LICENSE"
 description = "Provides data structure and validation for Brazilian Registries, such as CPF, CNPJ and CNH (currently only CPF and CNPJ is supported)"
 homepage = "https://github.com/oblitersoftware/validbr"
@@ -10,6 +11,10 @@ repository = "https://github.com/oblitersoftware/validbr"
 readme = "README.md"
 keywords = ["validation", "brazil", "cpf", "cnpj"]
 categories = ["data-structures", "internationalization", "parsing"]
+documentation = "https://docs.rs/validbr/"
+
+[package.metadata.docs.rs]
+all-features = true
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 [features]
