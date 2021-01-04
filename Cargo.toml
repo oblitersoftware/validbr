@@ -8,6 +8,8 @@ description = "Provides data structure and validation for Brazilian Registries, 
 homepage = "https://github.com/oblitersoftware/validbr"
 repository = "https://github.com/oblitersoftware/validbr"
 readme = "README.md"
+keywords = ["validation", "brazil", "cpf", "cnpj"]
+categories = ["data-structures", "internationalization", "parsing"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 [features]
