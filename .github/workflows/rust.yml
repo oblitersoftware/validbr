@@ -1,4 +1,4 @@
-name: Rust
+name: Build
 
 on:
   push:
@@ -15,9 +15,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Update Rust
-      run: curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain nightly -y
     - uses: actions/checkout@v2
+    - name: Change Rust to nightly
+      run: rustup default nightly
+    - name: Rustup update
+      run: rustup update
     - name: Build
       run: cargo +nightly build --verbose --all-features
     - name: Run tests

@@ -1,0 +1,27 @@
+name: Publish Crate
+
+on:
+  workflow_run:
+    workflows: [ "Build" ]
+    branches: [ main ]
+    types:
+      - completed
+  release:
+    types: [published]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Change Rust to nightly
+        run: rustup default nightly
+      - name: Rustup update
+        run: rustup update
+      - name: Publish
+        env:
+          CARGO_REGISTRY_TOKEN: {{ secrets.CRATESIO_SECRET }}
+        run: cargo +nightly publish --verbose
