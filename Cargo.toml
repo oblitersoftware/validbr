@@ -1,7 +1,7 @@
 [package]
 name = "validbr"
 version = "0.1.0"
-authors = ["oblitersofware", "JonathanxD <joniweb01@gmail.com>"]
+authors = ["oblitersofware", "JonathanxD <jhrldev@gmail.com>"]
 edition = "2018"
 license-file = "LICENSE"
 description = "Provides data structure and validation for Brazilian Registries, such as CPF, CNPJ and CNH (currently only CPF and CNPJ is supported)"
