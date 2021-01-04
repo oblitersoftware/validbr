@@ -1,0 +1,16 @@
+[package]
+name = "validbr"
+version = "0.1.0"
+authors = ["JonathanxD <joniweb01@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[features]
+complete = ["serde", "rand"]
+
+[dependencies]
+regex = "1.4.2"
+lazy_static = "1.4.0"
+serde = { version = "1.0.118", features = ["derive"], optional = true}
+rand = { version = "0.8.0", optional = true}
+
