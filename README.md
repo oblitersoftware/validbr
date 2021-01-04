@@ -1,3 +1,5 @@
+![Doc](https://docs.rs/validbr/badge.svg)
+![Crate](https://img.shields.io/crates/v/validbr.svg)
 # validbr
 
 Providing data structures and utilities for Brazilian Registries. Validbr is currently capable of validating CPF and CNPJ, but is planned to support:
