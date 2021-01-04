@@ -1,6 +1,7 @@
 [![Doc](https://docs.rs/validbr/badge.svg)](https://docs.rs/validbr)
 [![Crate](https://img.shields.io/crates/v/validbr.svg)](https://crates.io/crates/validbr)
 [![Github Release](https://img.shields.io/github/v/release/oblitersoftware/validbr?label=github%20release)](https://github.com/oblitersoftware/validbr/releases)
+[![Pijul Nest](https://img.shields.io/badge/pijul-hosted-blue)](https://nest.pijul.com/oblitersoftware/validbr)
 [![License: MIT](https://img.shields.io/crates/l/validbr)](https://opensource.org/licenses/MIT)
 [![Build](https://github.com/oblitersoftware/validbr/workflows/Build/badge.svg)](https://github.com/oblitersoftware/validbr/actions?query=workflow%3ABuild)
 [![Publish Crate](https://github.com/oblitersoftware/validbr/workflows/Publish%20Crate/badge.svg)](https://github.com/oblitersoftware/validbr/actions?query=workflow%3A%22Publish+Crate%22)
