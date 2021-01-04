@@ -1,8 +1,11 @@
 [package]
 name = "validbr"
 version = "0.1.0"
-authors = ["JonathanxD <joniweb01@gmail.com>"]
+authors = ["oblitersofware", "JonathanxD <joniweb01@gmail.com>"]
 edition = "2018"
+license-file = "LICENSE"
+repository = "https://github.com/oblitersoftware/validbr"
+readme = "README.md"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 [features]
