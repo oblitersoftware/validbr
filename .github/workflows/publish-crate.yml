@@ -23,5 +23,5 @@ jobs:
         run: rustup update
       - name: Publish
         env:
-          CARGO_REGISTRY_TOKEN: {{ secrets.CRATESIO_SECRET }}
+          CARGO_REGISTRY_TOKEN: ${{ secrets.CRATESIO_SECRET }}
         run: cargo +nightly publish --verbose
